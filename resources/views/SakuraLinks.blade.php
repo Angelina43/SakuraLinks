@@ -13,9 +13,17 @@
         <p>SakuraLinks</p>
     </header>
     <div class="firstForm">
-        <form action="{{ route('url') }}" method="POST">
+        <form action="{{ route('original_url') }}" method="POST">
             @csrf
-            <input class="input" type="text" name="url" placeholder="Вставьте сюда ссылку">
+            <input class="input" type="text" name="original_url" placeholder="Вставьте сюда ссылку">
+            <div class="radio-container">
+                <label class="switch">
+                    <input type="checkbox" id="checkbox" onchange="toggleInput()">
+                    <span class="slider round"></span>
+                </label>
+                <label class="slider-text">Свой вариант</label>
+            </div>
+            <input class="input second" placeholder="Напишите новый URL" id="input" name="user_url">
             <input class="button" type="submit" value="Обработать">
         </form>
     </div>
@@ -25,7 +33,10 @@
     document.ondragstart = noselect;
     document.onselectstart = noselect;
     document.oncontextmenu = noselect;
-    function noselect() {return false}
+
+    function noselect() {
+        return false
+    }
 </script>
 </body>
 </html>
@@ -61,7 +72,7 @@
         backdrop-filter: blur(10px);
     }
 
-    .input, .url{
+    .input, .url {
         background-color: transparent;
         color: white;
         border: 2px solid white;
@@ -77,14 +88,14 @@
         padding: 1rem;
     }
 
-    .url{
+    .url {
         display: flex;
         flex-direction: row;
         padding-top: 2vh;
         padding-left: 1vw;
     }
 
-    .copy{
+    .copy {
         height: 3vh;
         padding-left: 12vw;
     }
@@ -195,3 +206,50 @@
 
 </style>
 
+<script>
+    function toggleInput() {
+        const checkbox = document.getElementById('checkbox');
+        const inputField = document.getElementById('input');
+
+        if (checkbox.checked) {
+            inputField.style.display = 'block'; // показываем поле
+        } else {
+            inputField.style.display = 'none'; // скрываем поле
+        }
+    }
+
+    window.onload = function () {
+        toggleInput();
+    };
+
+    function showSecondForm() {
+        document.querySelector('.firstForm').style.display = 'none';
+        document.querySelector('.secondForm').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const processButton = document.querySelector('.firstForm input[type="button"][value="Обработать"]');
+        processButton.addEventListener('click', showSecondForm);
+
+        document.querySelector('.secondForm').style.display = 'none';
+    });
+
+    function showFirstForm() {
+        document.querySelector('.firstForm').style.display = 'block';
+        document.querySelector('.secondForm').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const processButton = document.querySelector('.secondForm input[type="button"][value="Вернуться к рефактору"]');
+        processButton.addEventListener('click', showFirstForm);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyImg = document.querySelector('.copy');
+        if (copyImg) {
+            copyImg.addEventListener('click', () => {
+                alert('Копировать');
+            });
+        }
+    });
+</script>

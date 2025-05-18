@@ -12,6 +12,7 @@ class Url extends Model
     public $timestamps = false;
 
     protected $table = 'url';
+    protected $fillable = ['name_url', 'short_url'];
 
     protected $guarded = '';
 }
