@@ -1,61 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌸 SakuraLinks
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**SakuraLinks** — минималистичный веб-сервис для сокращения длинных URL-адресов с возможностью задать собственный короткий алиас, реализованный на фреймворке **Laravel**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Возможности проекта
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* 🔗 **Автоматическое сокращение ссылок** — генерация уникального короткого кода из случайных символов.
+* ✍️ **Пользовательский алиас («Свой вариант»)** — возможность придумать собственное короткое имя для ссылки с проверкой на уникальность и конфликты маршрутов.
+* ⚡ **Мгновенное перенаправление** — редирект по короткому URL на исходный адрес.
+* 📋 **Копирование в один клик** — быстрое копирование готовой ссылки в буфер обмена.
+* 👤 **Система пользователей** — регистрация и авторизация аккаунтов.
+* 🎨 **Современный интерфейс** — полупрозрачные карточки (glassmorphism) на фоне в эстетике сакуры, собранные с помощью Vite.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🛠 Технологический стек
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* **Backend:** PHP 8.2+, Laravel 11 / 12
+* **Frontend:** Blade, CSS3 (Glassmorphism), Vanilla JavaScript, Vite
+* **База данных:** MySQL / MariaDB
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Установка и локальный запуск
 
-## Laravel Sponsors
+### 1. Клонирование репозитория
+```bash
+git clone https://github.com/Angelina43/SakuraLinks.git
+cd SakuraLinks
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Установка зависимостей
+Установите PHP-пакеты через Composer и фронтенд-зависимости через NPM:
+```bash
+composer install
+npm install
+```
 
-### Premium Partners
+### 3. Настройка окружения
+Скопируйте файл настроек и сгенерируйте ключ приложения:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Откройте файл `.env` и укажите параметры подключения к вашей базе данных (например, `sakura`):
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=sakura
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Contributing
+### 4. Миграции и сборка фронтенда
+Создайте таблицы в базе данных и соберите стили/скрипты:
+```bash
+php artisan migrate
+npm run build
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. Запуск сервера разработки
+```bash
+php artisan serve
+```
+После запуска проект будет доступен по адресу: **`http://127.0.0.1:8000`**
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📂 Структура основных файлов
 
-## Security Vulnerabilities
+* `app/Http/Controllers/UrlController.php` — валидация, генерация коротких кодов, сохранение ссылок и логика редиректа.
+* `app/Http/Controllers/UserController.php` — регистрация и авторизация пользователей.
+* `app/Models/Url.php` — модель для работы с таблицей `url`.
+* `resources/views/` — Blade-шаблоны (`layouts`, `url`, `user`).
+* `resources/css/style.css` — пользовательские стили интерфейса.
+* `resources/js/main.js` — логика переключателя «Свой вариант» и копирования ссылки.
+* `routes/web.php` — маршруты приложения и обработчик коротких ссылок `/{code}`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 📄 Лицензия
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Проект создан в учебных целях и распространяется под лицензией [MIT](https://opensource.org).

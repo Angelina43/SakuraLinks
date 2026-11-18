@@ -4,38 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UrlController extends Controller
 {
     public function handleInput(Request $request)
     {
-        $original_url = $request->input('original_url');
-        $user_url = $request->input('user_url');
-        $alphabet_english = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'w', 'x', 'y', 'z'];
+        $validated = $request->validate([
+            'original_url' => ['required', 'url'],
+            'user_url' => ['nullable', 'alpha_dash', 'max:50', 'unique:url,short_url', 'not_in:SakuraLinks,random-url,process-input'],
+        ]);
 
-        $url = new Url();
-        $url->name_url = $original_url;
-        if(empty($user_url)){
-            $random_string = '';
-            for ($i = 0; $i < 10; $i++) {
-                $random_name = random_int(0, 24);
-                $random_string .= $alphabet_english[$random_name];
-            }
-            $url->random_url = $random_string;
-        } else {
-            $url->short_url = $user_url;
-        }
+        $shortCode = $validated['user_url'] ?? $this->generateUniqueCode();
 
-        $url->save();
+        Url::create([
+            'name_url' => $validated['original_url'],
+            'short_url' => $shortCode,
+        ]);
 
-        return redirect('/SakuraLinks');
+        return redirect('/')->with('short_url', url($shortCode));
     }
 
-//    public function check(){
-//        return "Это вернула функция check";
-//        }
-//
-//    public function day(){
-//        return $this->check();
-//        }
+    private function generateUniqueCode(): string
+    {
+        do {
+            $code = Str::lower(Str::random(10));
+        } while (Url::where('short_url', $code)->exists());
+
+        return $code;
+    }
+
+    public function redirectUrl($code)
+    {
+        $url = Url::where('short_url', $code)
+            ->orWhere('random_url', $code)
+            ->firstOrFail();
+
+        return redirect()->away($url->name_url);
+    }
 }

@@ -9,13 +9,10 @@ class Url extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
-
     protected $table = 'url';
-    protected $fillable = ['name_url', 'short_url'];
 
-    protected $guarded = '';
+    protected $fillable = [
+        'name_url',
+        'short_url',
+    ];
 }
-
-
-// коммент
