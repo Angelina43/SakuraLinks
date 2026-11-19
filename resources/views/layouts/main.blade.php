@@ -19,8 +19,8 @@
         <div class="auth-container">
             <div class="auth-card">
                 <p>Здравствуйте, {{ auth()->user()->username }}!</p>
-                <a href="#" class="button auth-btn">Сократить ссылку</a>
-                <a href="#" class="button auth-btn">Личный кабинет</a>
+                <a href="{{route('convert')}}" class="button auth-btn">Сократить ссылку</a>
+                <a href="{{route('user.profile')}}" class="button auth-btn">Личный кабинет</a>
             </div>
 
             <div class="auth-card">

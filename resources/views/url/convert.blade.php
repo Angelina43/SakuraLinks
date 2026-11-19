@@ -15,5 +15,6 @@
             <input class="input second" placeholder="Напишите новый URL" id="input" name="user_url">
             <input class="button" type="submit" value="Обработать">
         </form>
+        <a href="{{ route('home') }}" class="button result-btn">На главную</a>
     </div>
 @endsection

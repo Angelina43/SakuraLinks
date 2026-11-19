@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Url;
+use App\Models\UserUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,17 +13,22 @@ class UrlController extends Controller
     {
         $validated = $request->validate([
             'original_url' => ['required', 'url'],
-            'user_url' => ['nullable', 'alpha_dash', 'max:50', 'unique:url,short_url', 'not_in:SakuraLinks,random-url,process-input'],
+            'user_url' => ['nullable', 'alpha_dash', 'max:50', 'unique:urls,short_url', 'not_in:SakuraLinks,random-url,process-input'],
         ]);
 
         $shortCode = $validated['user_url'] ?? $this->generateUniqueCode();
 
-        Url::create([
-            'name_url' => $validated['original_url'],
+        $url = Url::create([
+            'name_url'  => $validated['original_url'],
             'short_url' => $shortCode,
         ]);
 
-        return redirect('/')->with('short_url', url($shortCode));
+        UserUrl::create([
+            'user_id' => auth()->id(),
+            'url_id' => $url->id,
+        ]);
+
+        return redirect('index')->with('short_url', url($shortCode));
     }
 
     private function generateUniqueCode(): string

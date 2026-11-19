@@ -13,4 +13,6 @@ class Url extends Model
         'name_url',
         'short_url',
     ];
+
+
 }

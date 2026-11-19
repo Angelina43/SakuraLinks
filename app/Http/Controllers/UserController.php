@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\UserUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,13 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('home');
+    }
+
+    public function profile()
+    {
+        $userUrls = UserUrl::with('url')->where('user_id', Auth::id())->get();
+
+        return view('user.profile', ['userUrls' => $userUrls]);
     }
 
 

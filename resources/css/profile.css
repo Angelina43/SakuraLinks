@@ -1,0 +1,59 @@
+.profile-links {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.copy-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    align-items: center;
+}
+
+.short-result-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 3rem 0 1rem; /* 3rem справа — запас под иконку, чтобы текст не наезжал */
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 8px;
+    color: #ffb6c1;
+    font-size: 1.05rem;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.short-result-input:focus {
+    border-color: palevioletred;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.copy-wrapper .copy {
+    position: absolute;
+    right: 14px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    filter: invert(1);
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.copy-wrapper .copy:hover {
+    opacity: 1;
+    transform: scale(1.12);
+}
+
+.result-btn {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}

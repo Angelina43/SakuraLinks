@@ -28,5 +28,6 @@
 
             <button type="submit" class="button auth-submit">Авторизоваться</button>
         </form>
+        <a href="{{ route('home') }}" class="button result-btn">На главную</a>
     </div>
 @endsection

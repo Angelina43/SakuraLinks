@@ -11,4 +11,9 @@ class UserUrl extends Model
         'user_id',
         'url_id'
     ];
+
+    public function url()
+    {
+        return $this->belongsTo(Url::class, 'url_id');
+    }
 }

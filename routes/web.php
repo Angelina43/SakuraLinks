@@ -24,8 +24,29 @@ Route::prefix('login')->group(function () {
     Route::post('/', [UserController::class, 'login'])->name('login');
 });
 
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::post('/process-input', [UrlController::class, 'handleInput'])->name('original_url');
+    Route::get('/convert', function () {
+        return view('url.convert');
+    })->name('convert');
 
-Route::get('/{code}', [UrlController::class, 'redirectUrl']);
+    Route::get('/index', function () {
+        if (!session()->has('short_url')) {
+            return redirect()->route('home');
+        }
+
+        return view('url.index');
+    })->name('url.index');
+
+    Route::post('/process-input', [UrlController::class, 'handleInput'])->name('original_url');
+
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
+    Route::get('/{code}', [UrlController::class, 'redirectUrl']);
+});
+
+
+
+
+
