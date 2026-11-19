@@ -22,12 +22,31 @@ body {
     padding: 2rem;
 }
 
-header {
-    font-size: 4rem;
+.body h1,
+.body h2,
+.body label,
+.body p {
+    color: white;
+}
+
+.body h1 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.body header p {
     color: transparent;
     background-image: linear-gradient(to bottom, white, palevioletred);
     background-clip: text;
     -webkit-background-clip: text;
+}
+
+.body label {
+    font-size: 1.05rem;
+}
+
+header {
+    font-size: 4rem;
     margin-bottom: 2rem;
     text-align: center;
 }

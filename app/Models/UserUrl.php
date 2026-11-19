@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserUrl extends Model
 {
-    protected $table = 'user_url';
+    protected $table = 'user_urls';
     protected $fillable = [
         'user_id',
         'url_id'

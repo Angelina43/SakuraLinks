@@ -7,9 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Url extends Model
 {
-    use HasFactory;
-
-    protected $table = 'url';
+    protected $table = 'urls';
 
     protected $fillable = [
         'name_url',
