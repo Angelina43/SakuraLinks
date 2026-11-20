@@ -14,6 +14,7 @@ class UrlController extends Controller
         $validated = $request->validate([
             'original_url' => ['required', 'url'],
             'user_url' => ['nullable', 'alpha_dash', 'max:50', 'unique:urls,short_url', 'not_in:SakuraLinks,random-url,process-input'],
+            'description_url' => ['required', 'string', 'max:1000'],
         ]);
 
         $shortCode = $validated['user_url'] ?? $this->generateUniqueCode();
@@ -21,6 +22,7 @@ class UrlController extends Controller
         $url = Url::create([
             'name_url'  => $validated['original_url'],
             'short_url' => $shortCode,
+            'description_url' => $validated['description_url']
         ]);
 
         UserUrl::create([

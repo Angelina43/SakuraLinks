@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Url;
 use App\Models\User;
 use App\Models\UserUrl;
 use Illuminate\Http\Request;
@@ -57,6 +58,18 @@ class UserController extends Controller
         $userUrls = UserUrl::with('url')->where('user_id', Auth::id())->get();
 
         return view('user.profile', ['userUrls' => $userUrls]);
+    }
+
+    public function destroy(string $id)
+    {
+        $userUrl = UserUrl::where('user_id', auth()->id())
+            ->where('url_id', $id)
+            ->firstOrFail();
+
+        $userUrl->delete();
+        Url::where('id', $id)->delete();
+
+        return back()->with('status', 'Ссылка удалена');
     }
 
 

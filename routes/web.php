@@ -43,6 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
+    Route::delete('/profile/url/{id}', [UserController::class, 'destroy'])->name('url.destroy');
+
     Route::get('/{code}', [UrlController::class, 'redirectUrl']);
 });
 

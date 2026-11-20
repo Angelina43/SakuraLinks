@@ -1,40 +1,48 @@
 .profile-links {
     width: 100%;
     max-width: 460px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.2rem;
 }
 
-.copy-wrapper {
-    position: relative;
+.link-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    max-width: 460px;
+    margin-bottom: 12px;
+}
+
+.link-row {
+    position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 360px;
+}
+
+.copy-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 .short-result-input {
-    width: 100%;
-    height: 48px;
-    padding: 0 3rem 0 1rem; /* 3rem справа — запас под иконку, чтобы текст не наезжал */
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.75);
-    border-radius: 8px;
-    color: #ffb6c1;
-    font-size: 1.05rem;
-    transition: border-color 0.2s ease, background 0.2s ease;
-}
-
-.short-result-input:focus {
-    border-color: palevioletred;
-    background: rgba(255, 255, 255, 0.14);
+    width: 100% !important;
+    box-sizing: border-box;
+    padding-right: 45px;
+    margin: 0 !important;
 }
 
 .copy-wrapper .copy {
     position: absolute;
     right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 22px;
     height: 22px;
     cursor: pointer;
@@ -45,15 +53,51 @@
 
 .copy-wrapper .copy:hover {
     opacity: 1;
-    transform: scale(1.12);
+    transform: translateY(-50%) scale(1.12);
 }
 
-.result-btn {
-    width: 100%;
-    max-width: 300px;
-    margin-top: 0.5rem;
+.delete-form {
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto !important;
+    min-width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
+}
+
+.delete-btn img {
+    width: 22px;
+    height: 22px;
+    filter: invert(1);
+    opacity: 0.85;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.delete-btn:hover img {
+    opacity: 1;
+    transform: scale(1.12);
+}
+
+.link-description {
+    color: #b5b5c3;
+    font-size: 14px;
+    margin-top: 8px;
+    max-width: 360px;
+    text-align: center;
+    word-wrap: break-word;
+    margin-right: 0;
 }

@@ -5,6 +5,9 @@
         <form action="{{ route('original_url') }}" method="POST">
             @csrf
             <input class="input" type="text" name="original_url" placeholder="Вставьте сюда ссылку">
+
+            <textarea class="input" name="description_url" placeholder="Описание ссылки"></textarea>
+
             <div class="radio-container">
                 <label class="switch">
                     <input type="checkbox" id="checkbox" onchange="toggleInput()">

@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('name_url');
             $table->string('random_url')->nullable();
             $table->string('short_url')->nullable();
+            $table->text('description_url');
             $table->timestamps();
         });
     }

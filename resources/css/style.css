@@ -73,9 +73,10 @@ header {
 .result-btn {
     width: 100%;
     max-width: 300px;
-    margin-top: 0;
+    margin: 0.5rem auto 0 !important;
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    box-sizing: border-box;
 }
