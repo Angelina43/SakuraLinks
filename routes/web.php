@@ -41,9 +41,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/process-input', [UrlController::class, 'handleInput'])->name('original_url');
 
-    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [UserController::class, 'profile'])->name('user.profile');
 
-    Route::delete('/profile/url/{id}', [UserController::class, 'destroy'])->name('url.destroy');
+        Route::delete('/url/{id}', [UrlController::class, 'destroy'])->name('url.destroy');
+
+        Route::put('/url/{id}', [UrlController::class, 'update'])->name('url.update');
+    });
 
     Route::get('/{code}', [UrlController::class, 'redirectUrl']);
 });

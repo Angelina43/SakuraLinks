@@ -60,17 +60,5 @@ class UserController extends Controller
         return view('user.profile', ['userUrls' => $userUrls]);
     }
 
-    public function destroy(string $id)
-    {
-        $userUrl = UserUrl::where('user_id', auth()->id())
-            ->where('url_id', $id)
-            ->firstOrFail();
-
-        $userUrl->delete();
-        Url::where('id', $id)->delete();
-
-        return back()->with('status', 'Ссылка удалена');
-    }
-
 
 }
